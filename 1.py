@@ -1,93 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Использовать словарь, содержащий следующие ключи: фамилия и инициалы; номер
-# группы; успеваемость (список из пяти элементов). Написать программу, выполняющую
-# следующие действия: 
-# 1. ввод с клавиатуры данных в список, состоящий из словарей заданной структуры; 
-# 2. записи должны быть упорядочены по алфавиту; 
-# 3. вывод на дисплей фамилий и номеров групп для всех студентов, имеющих хотя бы одну оценку 2;
-# 4. если таких студентов нет, вывести соответствующее сообщение.
+# создайте словарь, связав его с переменной school , и наполните данными,
+# которые бы отражали количество учащихся в разных классах (1а, 1б, 2б, 6а, 7в и т. п.).
+# Внесите изменения в словарь согласно следующему:
+# а) в одном из классов изменилось количество учащихся,
+# б) в школе появился новый класс,
+# с) в школе был расформирован (удален) другой класс.
+# Вычислите общее количество учащихся в школе.
 
-if __name__ == '__main__':  
+if __name__ == '__main__':
+    school = {'1A': 20, '2A': 25, '3A': 20, '4A': 20, '5A': 20}
 
-    students = []
+    school['4A'] = 10
+    school['1Ы'] = 1
+    del school['1A']
 
-    while True:
-        command = input(">>> ").lower()
-
-        if command == 'exit':
-            break
-
-        elif command == 'add':
-            marks = [0] * 5
-            name = input("Фамилия и инициалы? ")
-            group = input("Номер группы? ")
-            marks = [int(input("Какие оценки? ")) for i in marks]
-
-            student = {
-              'name': name,
-              'group': group,
-              'marks': marks,
-            }
-
-            students.append(student)
-
-            if len(students) > 1:
-                students.sort(key=lambda item: item.get('name', ''))
-
-        elif command == 'list':
-            line = '+-{}-+-{}-+-{}-+-{}-+'.format(
-                '-' * 4,
-                '-' * 30,
-                '-' * 20,
-                '-' * 15
-            )
-            print(line)
-            print(
-                '| {:^4} | {:^30} | {:^20} | {:^15} |'.format(
-                    "№",
-                    "Ф.И.О.",
-                    "Группа",
-                    "Успеваемость"
-                )
-            )
-            print(line)
-
-            for idx, student in enumerate(students, 1):
-                marks = student.get('marks', ''),
-
-                print(
-                    '| {:>4} | {:<30} | {:<20} | {:>15} |'.format(
-                        idx,
-                        student.get('name', ''),
-                        student.get('group', ''),
-                        ' '.join(map(str, marks)),
-                    )
-                )
-            print(line)
-
-        elif command == 'marks':
-            count = 0
-            line = '+-{}-+-{}-+'.format(
-                '-' * 30,
-                '-' * 10
-            )
-            for student in students:
-                if 2 in student.get('marks'):
-                    count += 1
-                    if count == 1:
-                        print(line)
-                    print(
-                        '| {:<30} | {:^10} |'.format(
-                            student.get('name', ''),
-                            student.get('group', ''),
-                        )
-                    )
-                    print(line)
-
-            if count == 0:
-                print("Студенты не найдены.")
-
-        else:
-            print(f"Неизвестная команда {command}", file=sys.stderr)
+    print("Всего учеников в школе: ", sum(school.values()))
