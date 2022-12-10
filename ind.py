@@ -11,6 +11,7 @@
 
 if __name__ == '__main__':
 
+    N = 5
     students = []
 
     while True:
@@ -24,6 +25,8 @@ if __name__ == '__main__':
             group = input("Номер группы? ")
             buf = [int(a) for a in input().split()]
             marks = list(filter(lambda x: x > 0 and x < 6, buf))
+            if len(marks) != N:
+                continue
 
             student = {
               'name': name,
