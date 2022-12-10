@@ -9,7 +9,7 @@
 # 3. вывод на дисплей фамилий и номеров групп для всех студентов, имеющих хотя бы одну оценку 2;
 # 4. если таких студентов нет, вывести соответствующее сообщение.
 
-if __name__ == '__main__':  
+if __name__ == '__main__':
 
     students = []
 
@@ -20,10 +20,10 @@ if __name__ == '__main__':
             break
 
         elif command == 'add':
-            marks = [0] * 5
             name = input("Фамилия и инициалы? ")
             group = input("Номер группы? ")
-            marks = [int(input("Какие оценки? ")) for i in marks]
+            buf = [int(a) for a in input().split()]
+            marks = list(filter(lambda x: x > 0 and x < 6, buf))
 
             student = {
               'name': name,
